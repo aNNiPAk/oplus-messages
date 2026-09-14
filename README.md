@@ -1,15 +1,25 @@
 # OPlus messages
 
-Unmodified stock APK for `com.android.mms`, extracted from the original OPlus firmware.
+Канал исходного stock APK `com.android.mms` для Obtainium.
 
-This channel contains OPlus Messages (`com.android.mms`). Google Messages (`com.google.android.apps.messaging`) is excluded. OPlus/ColorOS manifest evidence and APK signatures are checked before publication.
+Источник выбирается из свежих OTA разных **OPPO, OnePlus и realme**. По умолчанию проверяются до шести доноров; победитель определяется по реальному Android `versionCode`.
 
-## Updates
+- **Обычный релиз:** базовый APK содержит русский.
+- **Prerelease (`-exp`):** более новый APK без русского, с английским либо неизвестным языком ресурсов.
+- APK только с другими явно указанными языками не публикуется.
+- Подпись проверяется; SHA-256 сертификата записывается, но смена сертификата не блокирует обновление.
+- Overlays, `uses-library` и native библиотеки записываются в отчёт для диагностики.
 
-The updater checks the official OTA source daily. To check manually, open Actions → Update OPlus messages → Run workflow. Leave `dry_run` enabled to verify without publishing; disable it to publish a newer verified version.
+Это именно OPlus Messages (`com.android.mms`). Google Messages исключён; OPlus/ColorOS проверяется в манифесте.
 
-Each release contains one unchanged APK, its version, signing certificate SHA-256, APK SHA-256, and firmware source path. Updates with a changed signing certificate are refused.
+## Запуск
 
-Use this repository URL as a GitHub source in Obtainium. No personal access token is required by the updater.
+Daily schedule включён. Для ручной проверки: Actions → Update OPlus messages → Run workflow → оставить `dry_run: true`. Для публикации отключить `dry_run`.
 
-Updater: [oplus-stock-app-bot](https://github.com/aNNiPAk/oplus-stock-app-bot).
+Workflow сначала выполняет dry-run, затем повторно проверяет выбранные APK и публикует их без второго извлечения OTA. Встроенный `GITHUB_TOKEN` этого канала публикует в этот же репозиторий; PAT не требуется.
+
+Добавьте URL репозитория в Obtainium как GitHub source. Отключённые prereleases оставят вас на stable с русским; включайте их для experimental версий.
+
+Каждый релиз содержит один неизменённый APK, его SHA-256, сертификат, языки и точный источник прошивки.
+
+[Код и политика выбора доноров](https://github.com/aNNiPAk/oplus-stock-app-bot).
